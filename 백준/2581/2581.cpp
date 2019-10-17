@@ -23,7 +23,7 @@ int main(){
 	int sum=0;
 	int min=10001;
 	
-	for(int i=m;i<n;i++){
+	for(int i=m;i<=n;i++){
 		sum += cal(i,&min);
 	}
 	
