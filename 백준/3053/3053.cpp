@@ -3,7 +3,7 @@
 using namespace std;
 
 int main(){
-	float n;
+	double n;
 	cin >> n;
 	
 	printf("%.6f\n",n*n*M_PI);
