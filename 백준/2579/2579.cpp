@@ -6,6 +6,7 @@ int max(int a, int b){
 	return b;
 }
 
+
 int main(){
 	int n;
 	cin >> n;
