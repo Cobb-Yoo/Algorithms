@@ -1,64 +1,65 @@
+#include <stdio.h>
 #include <iostream>
 #include <algorithm>
-#include <stack>
+#include <vector>
+#include <math.h>
 using namespace std;
  
-const int MAX = 1000000 + 1;
+
+int n;
+int arr[1001];
+int d[1001];
+int v[1001];
+vector<int>answer;
  
-int N;
-int arr[MAX];
-int cache[MAX];
-pair<int, int> answer[MAX];
-stack<int> s;
+void go(int index) {
+    if (index == -1) {
  
-int LIS(void)
-{
-        int idx = 0;
-        cache[idx] = arr[0];
-        answer[0] = { 0, arr[0] };
+        return;
+    }
+    answer.push_back(arr[index]);
+    go(v[index]);
  
-        for (int i = 1; i < N; i++)
-        {
-                 if (cache[idx] < arr[i])
-                 {
-                         cache[++idx] = arr[i];
-                         answer[i] = { idx, arr[i] };
-                 }
-                 else
-                 {
-                         int idx2 = lower_bound(cache, cache + idx, arr[i]) - cache;
-                         cache[idx2] = arr[i];
-                         answer[i] = { idx2, arr[i] };
-                 }
-        }
-        return idx + 1;
 }
  
-int main()
-{
-        ios_base::sync_with_stdio(0);
-        cin.tie(0);
-        cin >> N;
  
-        for (int i = 0; i < N; i++)
-                 cin >> arr[i];
+int main() { 
+    cin >> n;
  
-        int result = LIS();
-        cout << result << "\n";
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
  
-        int num = result - 1;
-        for (int i = N - 1; i >= 0; i--)
-                 if (answer[i].first == num)
-                 {
-                         s.push(answer[i].second);
-                         num--;
-                 }
- 
-        while (!s.empty())
-        {
-                 cout << s.top() << " ";
-                 s.pop();
+    for (int i = 0; i < n; i++) {
+        v[i] = -1;
+        d[i] = 1;
+        for (int j = 0; j < i; j++) {
+            if (arr[i] > arr[j] && d[i] < d[j] + 1) {
+                d[i] = d[j] + 1;
+                v[i] = j;
+            }
         }
-        cout << "\n";
-        return 0;
+    }
+ 
+    int ans = 0;
+ 
+    for (int i = 0; i < n; i++) {
+        ans = max(ans, d[i]);
+    }
+ 
+    cout << ans << endl;
+ 
+    for (int i = 0; i < n; i++) {
+        if (d[i]==ans){
+            answer.push_back(arr[i]);
+            go(v[i]);
+            break;
+        }
+    }
+ 
+    sort(answer.begin(), answer.end());
+    for (int i = 0; i < answer.size(); i++) {
+        cout << answer[i] << " ";
+    }
+ 
 }
