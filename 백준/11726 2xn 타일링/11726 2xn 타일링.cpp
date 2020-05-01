@@ -10,7 +10,7 @@ void init(){
 	arr[2] = 2;
 	
 	for(int i=3;i<=MAX;i++){
-		arr[i] = arr[i-1] + arr[i-2];
+		arr[i] = (arr[i-1] + arr[i-2])%10007;
 	}
 }
 
