@@ -8,8 +8,8 @@ int main(){
 	
 	int arr[1001] = {0};
 	
-	for(int i=0;i<n;i++){
-		for(int j=0;j<m;j++){
+	for(int i=1;i<=n;i++){
+		for(int j=1;j<=m;j++){
 			int tmp;
 			cin >> tmp;
 			
@@ -17,5 +17,5 @@ int main(){
 		}
 	}
 	
-	cout << arr[m-1];
+	cout << arr[m];
 }
