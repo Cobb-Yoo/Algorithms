@@ -28,9 +28,7 @@ int main(){
 			else dp[i] = dp[i-1];
 		}
 		
-		int cnt=0;
-		for(int i=1;i<=n;i++) if(b[i]) cnt++;
-		
-		cout << cnt << endl;
+			
+		cout << dp[n] << endl;
 	}
 }
