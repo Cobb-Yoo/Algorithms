@@ -5,5 +5,5 @@ int main(){
 	int a,b;
 	cin >> a >> b;
 	
-	cout << b*2 - a << endl;
+	cout << b*2 - a << endl; 
 }
