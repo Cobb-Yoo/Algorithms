@@ -32,7 +32,7 @@ int main(){
             flag = 1;
         }
         else flag = 0;
-        answer[i] = n+'0';
+        answer[i] = n +'0';
     }
     
     if(flag) answer.push_back('1');
