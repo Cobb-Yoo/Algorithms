@@ -6,8 +6,9 @@ int main(){
 	cin >> a >> b >> c;
 	
 	int tmp = b+c;
-	
 	a += tmp/60;
+	
+	a %= 24;
 	tmp %= 60;
 	
 	cout << a << " " << tmp << endl;
