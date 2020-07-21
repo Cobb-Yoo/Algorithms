@@ -13,6 +13,7 @@ int main(){
         v[i].second = i;
     }
 
+
     sort(v.begin(), v.end());
 
     int cnt = 0;
@@ -21,9 +22,9 @@ int main(){
         int tmp = cnt;
 
         answer[idx] = tmp;
-        cnt++;
-
-        while (i < n && v[i].first == v[i + 1].first) {
+   
+        wh     cnt++;
+ile (i < n && v[i].first == v[i + 1].first) {
             ++i;
             idx = v[i].second;
             answer[idx] = tmp;
