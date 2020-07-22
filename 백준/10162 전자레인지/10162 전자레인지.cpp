@@ -14,6 +14,7 @@ int main(){
 		n%=60;
 		c=n/10;
 		
+		
 		cout << a << " " << b << " " << c << endl;
 	}
 }
