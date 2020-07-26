@@ -15,14 +15,12 @@ int find(int n){
 	}
 	else {
 		q.push(n);
-		return n = find(arr[n]);
+		return find(arr[n]);
 	}
 }
 
-void unioon(int a, int b){
-	if(find(a) == find(b)) return;
-	
-	if(arr[a] < arr[b]) {
+void unioon(int a, int b){	
+	if(arr[a] > arr[b]) {
 		int tmp = a;
 		a = b;
 		b = tmp;
@@ -45,7 +43,7 @@ int main(){
 	for(int i=0;i<m;i++){
 		int flag, a, b;
 		
-		cin >> flag >> a >> b;
+		scanf("%d %d %d",&flag,&a,&b);
 		
 		if(flag == 1) {
 			if(a == b) cout << "YES\n";
@@ -53,8 +51,10 @@ int main(){
 			else cout << "NO\n";
 		}
 		else {
-			if(a == b) continue;
-			unioon(a, b);
+			int a_parent = find(a);
+			int b_parent = find(b);
+			
+			if(a_parent != b_parent) unioon(a_parent, b_parent);
 		}
 	}
 }
