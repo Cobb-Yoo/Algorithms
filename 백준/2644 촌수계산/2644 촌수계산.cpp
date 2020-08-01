@@ -5,20 +5,20 @@
 using namespace std;
 
 int n;
-int start, end;
+int s_node, e_node;
 int range;
 vector<int> family[100];
 int cache[100];
 
 int bfs(){
 	queue<int> q;
-	q.push(start);
+	q.push(s_node);
 	
 	while(!q.empty()){
 		int currentNode = q.front();
 		q.pop();
 		
-		if(currentNode == end) return cache[end];
+		if(currentNode == e_node) return cache[e_node];
 		
 		for(int i=0;i<family[currentNode].size();i++){
 			int next = family[currentNode][i];
@@ -36,7 +36,7 @@ int main(){
 	memset(cache,0,sizeof(cache));
 	cin >> n;	
 	
-	cin >> start >> end >> range;
+	cin >> s_node >> e_node >> range;
 	
 	for(int i=0;i<range;i++){
 		int parent, child;
