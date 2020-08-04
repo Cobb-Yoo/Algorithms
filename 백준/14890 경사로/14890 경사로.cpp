@@ -35,7 +35,7 @@ void col(int y){
 	for(int i=0;i<n;){
 		int now = map[y][i];
 		
-		if(i+1<n && now == map[y][i+1]){
+		if(i+1<n && now == map[y][i+1]){ 
 			i++;
 			continue;
 		}
