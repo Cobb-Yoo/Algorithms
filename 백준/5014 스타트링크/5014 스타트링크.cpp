@@ -7,7 +7,7 @@ int f,s,g,u,d;
 int arr[1000001];
 
 int bfs(){
-	if(s == g) return 1;
+	if(s == g) return 0;
 	
 	queue<int> q;
 	q.push(s);
@@ -35,6 +35,6 @@ int main(){
 	memset(arr,-1,sizeof(arr));
 	
 	int result = bfs();
-	if(result==-1) cout << "use the stairs" << endl;
+	if(result == -1) cout << "use the stairs" << endl;
 	else cout << result << endl;
 }
