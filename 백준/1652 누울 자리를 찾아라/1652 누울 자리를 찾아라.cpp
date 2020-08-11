@@ -55,5 +55,6 @@ int main(){
 	
 	for(int i=0;i<n;i++) cin >> map[i];
 	
+	
 	cout << col() << " " << row() << endl;
 }
