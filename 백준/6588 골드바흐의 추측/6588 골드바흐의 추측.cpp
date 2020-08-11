@@ -9,12 +9,12 @@ vector<int> v;
 void check(int n){
 	for(int i=0;;i++){
 		if(arr[n-v[i]]){
-			cout << n << " = " << v[i] << " + " << n-v[i] << endl;
+			cout << n << " = " << v[i] << " + " << n-v[i] << "\n";
 			return;
 		}
 	}
 	
-	cout << "Goldbach's conjecture is wrong." << endl;
+	cout << "Goldbach's conjecture is wrong.\n";
 }
 
 void init(){
