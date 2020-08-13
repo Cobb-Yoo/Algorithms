@@ -5,14 +5,15 @@
 #define ll long long
 using namespace std;
 
+map<ll, int> m;
+vector<pair<ll,int>> v;
+	
 bool cmp(pair<ll,int> a, pair<ll,int> b){
-	if(a.second == b.second) a.first < b.first;
+	if(a.second == b.second) return a.first < b.first;
 	return a.second > b.second;
 }
 
 int main(){
-	map<ll, int> m;
-	vector<pair<ll,int>> v;
 
 	int n; cin >> n;
 	
