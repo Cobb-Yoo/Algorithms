@@ -2,68 +2,44 @@
 #include <cstring>
 using namespace std;
 
-int n, l;
+int n,l;
+int map[100][200];
 int answer = 0;
-int map[100][100];
-bool useRunway[100];
 
-void row(int x){
-	memset(useRunway,0,sizeof(useRunway));
-	for(int i=0;i<n;){
-		int now = map[i][x];
-		
-		if(i+1<n && now == map[i+1][x]){
-			i++;
-			continue;
-		}
-		
-		int j;
-		for(j=i;j<i+l && j<n;j++) {
-			if(now != map[j][x] && !useRunway[j]) return;
-			useRunway[j] = 1;
-		}
-		if(j != i+l) return;
-		
-		i+=l;
+void runway(int idx){
+	int cnt = 1;
+	int i;
+	for(i=0;i<n-1;i++){
+		if(map[i][idx] == map[i+1][idx]) cnt++;
+		else if(map[i][idx]+1 == map[i+1][idx] && cnt >= l) cnt = 1;
+		else if(map[i][idx]-1 == map[i+1][idx] && cnt >= 0) cnt = 1-l;
+		else break;
 	}
 	
-	answer++;
+	if(i==n-1 && cnt >= 0) answer++;
 }
 
-void col(int y){
-	memset(useRunway,0,sizeof(useRunway));
-	for(int i=0;i<n;){
-		int now = map[y][i];
-		
-		if(i+1<n && now == map[y][i+1]){ 
-			i++;
-			continue;
-		}
-		
-		int j;
-		for(j=i;j<i+l && j<n;j++) {
-			if(now != map[y][j] && !useRunway[j]) return;
-			useRunway[j] = 1;
-		}
-		if(j != i+l) return;
-		
-		i+=l;
-	}
-	
-	answer++;
-}
-
-int main(){
-	cin >> n >> l;
-	
+void init(){
 	for(int i=0;i<n;i++){
 		for(int j=0;j<n;j++){
 			cin >> map[i][j];
 		}
 	}
 	
-	for(int i=0;i<n;i++) row(i);
-	for(int i=0;i<n;i++) col(i);
+	for(int i=0;i<n;i++){
+		for(int j=n;j<2*n;j++){
+			map[i][j] = map[j-n][i];
+		}
+	}
+}
+
+int main(){
+	memset(map,-1,sizeof(map));
+	cin >> n >> l;
 	
-	cout << answer << endl;
+	init();
+	
+	for(int i=0;i<2*n;i++) runway(i);
+	
+	cout << answer << endl; 
 }
