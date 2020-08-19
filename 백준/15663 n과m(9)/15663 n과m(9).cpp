@@ -1,27 +1,25 @@
 #include <iostream>
-#include <algorithm>
 #include <vector>
+#include <cstring>
 using namespace std;
 
-int arr[8];
-bool visited[8];
-vector<int> answer;
-int n,m;
+const int MAX = 10001;
 
-void dfs(int begin, int cnt){
-	if(cnt == m){
-		for(int i=0;i<m;i++) cout << answer[i] << " ";
-		cout << endl;
-		return; 
-	}
+vector<int> arr[MAX];
+vector<int> haking;
+int visited[MAX];
+int n,m;
+int answer = 0;
+
+void dfs(int idx){
+	haking[idx]++;
+	answer = max(answer, haking[idx]);
 	
-	for(int i=begin+1;i<n;i++){
-		if(!visited[i]){
-			visited[i] = 1;
-			answer.push_back(arr[i]);
-			dfs(i,cnt+1);
-			answer.pop_back();
-			visited[i] = 0;
+	for(int i=0;i<arr[idx].size();i++){
+		int next = arr[idx][i];
+		if(!visited[next]){
+			visited[next] = 1;
+			dfs(next);
 		}
 	}
 }
@@ -29,14 +27,24 @@ void dfs(int begin, int cnt){
 int main(){
 	cin >> n >> m;
 	
-	for(int i=0;i<n;i++) cin >> arr[i];
-	sort(arr,arr+n);
+	for(int i=0;i<m;i++){
+		int a, b;
+		cin >> a >> b;
+		
+		arr[a].push_back(b);
+	}
+	haking.resize(n+1,0);
 	
-	for(int i=0;i<n;i++) {
-		visited[i] = 1;
-		answer.push_back(arr[i]);
-		dfs(i,1);
-		answer.pop_back();
-		visited[i] = 0;
+	for(int i=1;i<=n;i++){
+		memset(visited,0,sizeof(visited));
+		
+		visited[i]++;
+		dfs(i);
+	}
+	
+	for(int i=1;i<=n;i++){
+		if(haking[i] == answer){
+			cout << i << " ";
+		}
 	}
 }
