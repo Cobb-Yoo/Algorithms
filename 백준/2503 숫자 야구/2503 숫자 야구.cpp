@@ -42,8 +42,8 @@ int main(){
         visited[i] = 0;
 	}
 	
-	int n; cin >> n;
-	for(int i=0;i<n;i++){
+	
+	for(int i=0;i<10;i++){
 		vector<string> tmp;
 		int num, s,b;
 		cin >> num >> s >> b;
