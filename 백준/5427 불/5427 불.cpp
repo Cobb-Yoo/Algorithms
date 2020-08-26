@@ -69,6 +69,7 @@ int main(){
 	int t; cin >> t;
 	
 	while(t--){
+		fire.clear();
 		memset(visited,0,sizeof(visited));
 		cin >> m >> n;
 		
