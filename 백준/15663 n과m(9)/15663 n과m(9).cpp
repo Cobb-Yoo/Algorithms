@@ -1,50 +1,53 @@
 #include <iostream>
+#include <map>
 #include <vector>
-#include <cstring>
+#include <algorithm>
 using namespace std;
 
-const int MAX = 10001;
-
-vector<int> arr[MAX];
-vector<int> haking;
-int visited[MAX];
 int n,m;
-int answer = 0;
+vector<int> v;
+int visited[8];
+map<int,int> numcnt;
 
-void dfs(int idx){
-	haking[idx]++;
-	answer = max(answer, haking[idx]);
+void dfs(int idx, int cnt){
+	if(cnt == m){
+		for(int i=0;i<m;i++){
+			cout << v[visited[i]] << " ";
+		}
+		cout << '\n';
+		
+		return;
+	}
 	
-	for(int i=0;i<arr[idx].size();i++){
-		int next = arr[idx][i];
-		if(!visited[next]){
-			visited[next] = 1;
-			dfs(next);
+	if(idx == n) return;
+	
+	for(int i=0;i<v.size();i++){
+		if(numcnt[v[i]]){
+			numcnt[v[i]]--;
+			visited[idx] = i;
+			dfs(idx+1, cnt+1);
+			numcnt[v[i]]++;
 		}
 	}
 }
 
 int main(){
+	ios_base::sync_with_stdio(0);
+	cin.tie(0);
+	
 	cin >> n >> m;
 	
-	for(int i=0;i<m;i++){
-		int a, b;
-		cin >> a >> b;
+	for(int i=0;i<n;i++){
+		int num; cin >> num;
 		
-		arr[a].push_back(b);
-	}
-	haking.resize(n+1,0);
-	
-	for(int i=1;i<=n;i++){
-		memset(visited,0,sizeof(visited));
-		
-		visited[i]++;
-		dfs(i);
-	}
-	
-	for(int i=1;i<=n;i++){
-		if(haking[i] == answer){
-			cout << i << " ";
+		if(!numcnt.count(num)){
+			numcnt[num] = 1;
+			v.push_back(num);
 		}
+		else numcnt[num]++;
 	}
+	
+	sort(v.begin(), v.end());
+	
+	dfs(0,0);
 }
