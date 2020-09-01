@@ -5,7 +5,7 @@ using namespace std;
 
 const int INF = 987654321;
 const int MAX = 1000;
-int n,m,p;
+int n,m,x;
 vector<pair<int,int>> graph[MAX+1];
 
 vector<int> dijstra(int start, int vertex){
@@ -37,7 +37,7 @@ vector<int> dijstra(int start, int vertex){
 }
 
 int main(){
-	cin >> n >> m >> p;
+	cin >> n >> m >> x;
 	
 	for(int i=0;i<m;i++){
 		int begin, end, cost;
@@ -49,11 +49,11 @@ int main(){
 	int result = -1;
 	for(int i=1;i<=n;i++){
 		vector<int> tmp = dijstra(i, n+1);
-		vector<int> tmp2 = dijstra(p, n+1);
+		vector<int> tmp2 = dijstra(x, n+1);
 		
-		if(tmp[p]+tmp2[i] >= INF || tmp[p]+tmp2[i] < 0) continue;
+		if(tmp[x]+tmp2[i] >= INF || tmp[x]+tmp2[i] < 0) continue;
 		
-		result = max(result, tmp[p]+tmp2[i]);
+		result = max(result, tmp[x]+tmp2[i]);
 	}
 	
 	cout << result << endl;
