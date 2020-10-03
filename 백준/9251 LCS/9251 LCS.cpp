@@ -5,6 +5,8 @@
 
 using namespace std;
 
+int dp[100][100];
+
 int main(){
 	string s1;
 	string s2;
@@ -15,7 +17,7 @@ int main(){
 	int len1 = s1.size();
 	int len2 = s2.size();
 	
-	int dp[len1+1][len2+1];
+	
 	memset(dp,0,sizeof(dp));
 	
 	for(int i=1;i<=len1;i++){
