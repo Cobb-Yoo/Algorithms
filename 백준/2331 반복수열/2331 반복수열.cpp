@@ -1,36 +1,50 @@
 #include <iostream>
+#include <vector>
 #include <cmath>
-#include <cstring>
 using namespace std;
 
-int n,p;
-int arr[300000];
+bool arr[300000];
+vector<int> v;
+int a,p;
+int idx;
 
-void func(int &num){
-	int tmp = 0;
+void solve(){
+	int tmp = a;
+	v.push_back(tmp);
+	arr[tmp] = 1;
 	
-	arr[num]++;
-	
-	while(num>0){
-		tmp += pow(num%10, p);
-		num /= 10;
+	while(1){
+		int n = tmp;
+		int b = 0;
+		
+		while(n > 0){
+			b += (int)pow((n%10), p);
+			n /= 10;
+		}
+		
+		tmp = b;
+		
+		if(arr[tmp]) {
+			idx = tmp;
+			return;
+		}
+		else{
+			v.push_back(tmp);
+			arr[tmp] = 1;
+		}
 	}
-	
-	num = tmp;
 }
 
-int main(){
-	cin >> n >> p;
+int main(){	
+	cin >> a >> p;
 	
-	int tmp = n;
-	do{
-		func(tmp);
-		if(arr[tmp] > 2) break;
-	}while(tmp != n);
+	solve();
 	
 	int cnt = 0;
-	for(int i=0;i<300000;i++) {
-		if(arr[i]==1) cnt++;
+	
+	for(auto i : v){
+		if(i == idx) break;
+		else cnt++;
 	}
 	
 	cout << cnt << endl;
