@@ -1,62 +1,66 @@
 #include <iostream>
-#include <vector>
 #include <string>
+#include <cstdio>
+#include <vector>
 using namespace std;
- 
-string T, P;
-vector<int> getPartialMatch(const string &N){
-    int M = N.size();
-    vector<int> pi(M, 0);
-        
-    int begin = 1, matched = 0;
-    while (begin + matched < M) {
-        if (N[begin + matched] == N[matched]){
-            matched++;
-            pi[begin + matched - 1] = matched;
-        }
-        else{
-            if (matched == 0) begin++;
-            else {
-                begin += matched - pi[matched - 1];
-                matched = pi[matched - 1];
-            }
-        }
-    }
-    return pi;
+
+string base, hook;
+
+vector<int> getPi(){
+	int len = hook.size();
+	vector<int> pi(len, 0);
+	
+	int begin = 1;
+	int matched = 0;
+	
+	while(begin + matched < len){
+		if(hook[begin+matched] == hook[matched]){
+			matched++;
+			pi[begin+matched-1] = matched;
+		}
+		else{
+			if(matched == 0) begin++;
+			else{
+				begin += matched - pi[matched-1];
+				matched = pi[matched-1];
+			}
+		}
+	}
+	return pi;
 }
 
-vector<int> kmpSearch2(const string &H, const string &N){
-	int n = H.size(), m = N.size();
-
-    vector<int> result;
-    vector<int> pi = getPartialMatch(N);
-
-    int matched = 0;
-
-    for (int i = 0; i < n; i++){
-		while (matched > 0 && H[i] != N[matched]) matched = pi[matched - 1];
-
-	    if (H[i] == N[matched]){
-    	    matched++;
-
-        	if (matched == m){
-            	result.push_back(i - m + 2);
-                matched = pi[matched - 1];
-            }
-        }
-    }
+vector<int> kmp(){
+	int matched = 0;
+	
+	vector<int> pi = getPi();
+	vector<int> result;
+	
+	int b_len = base.size();
+	int h_len = hook.size();
+	
+	for(int i=0;i<b_len;i++){
+		while(matched > 0 && base[i] != hook[matched])
+			matched = pi[matched-1];
+			
+		if(base[i] == hook[matched]){
+			matched++;
+			if(matched == h_len){
+				result.push_back(i-h_len+2);
+				matched = pi[matched-1];
+			}
+		}
+	}
+	return result;
 }
 
-int main(void){
-    ios_base::sync_with_stdio(0);
-    cin.tie(0);
-
-    getline(cin, T);
-    getline(cin, P);
-
-    vector<int> result = kmpSearch2(T, P);
-    
-    int len = result.size();
-    cout << len << "\n";
-    for(int i=0;i<len;i++) cout << result[i] << "\n";
+int main(){
+	getline(cin, base);
+	getline(cin, hook);
+	
+	vector<int> v = kmp();
+	int len = v.size();
+	cout << len << endl;
+	for(int i=0;i<len;i++){
+		cout << v[i] << "\n";
+	}
 }
