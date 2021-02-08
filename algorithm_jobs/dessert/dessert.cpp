@@ -3,48 +3,43 @@
 using namespace std;
 
 int n,cnt;
-char option[] = {'+','-','.',' '};
-int a[16];
-char b[16];
-int c[16];
-char d[16];
+char option[] = {'+','-','.'};
+int a[200];
+char b[200];
 
-void solve(int num){
-	if(num == n){
-		int idx=0;
-		int tmp=1;
-		int sum=0;
+void solve(int idx, vector<char> v){
+	if(idx == n){
+		a[0] = 1;
+		int a_idx = 1;
+		int b_idx = 0;
 		
-		for(int i=2;i<=num;i++){
-			if(b[i-1]==option[2]){
-				if(i<10) tmp = tmp*10 + i;
-				else tmp = tmp*100 + i;
+		for(int i=0;i<n-1;i++){
+			if(v[i] == option[2]){
+				int tmp;
+				if(i+2>=10) tmp = a[a_idx-1] * 100 + i+2;
+				else tmp = a[a_idx-1] * 10 + i+2;
 				
-				if(i==n){
-					c[idx] = tmp;
-					break;
-				}
+				a[a_idx-1] = tmp;
 			}
 			else{
-				c[idx] = i;
-				d[idx++] = b[i-1];
-				tmp++;
+				a[a_idx++] = i+2;
+				b[b_idx++] = v[i];
 			}
 		}
 		
-		sum = c[0];
-		for(int i=0;i<idx;i++){
-			if(d[i]==option[0]) sum+=c[i+1];
-			else sum-=c[i+1];
+		int num = a[0];
+		
+		for(int i=0;i<b_idx;i++){
+			if(b[i] == option[0]) num += a[i+1];
+			else num -= a[i+1];
 		}
 		
-		if(sum == 0){
+		if(num == 0){
 			cnt++;
-			if(cnt>20) return;
-			
+			if(cnt > 20) return;
 			cout << 1 << " ";
-			for(int i=1;i<n;i++){
-				cout << b[i] << " " << i+1 << " ";
+			for(int i=0;i<n-1;i++){
+				cout << v[i] << " " << i+2 << " ";
 			}
 			cout << endl;
 		}
@@ -52,15 +47,18 @@ void solve(int num){
 	}
 	
 	for(int i=0;i<3;i++){
-		b[num] = option[i];
-		solve(num+1);
+		v.push_back(option[i]);
+		solve(idx+1, v);
+		v.pop_back();
 	}
 }
 
 int main(){
 	cin >> n;
 	
-	solve(1);
+	vector<char> v;
+	
+	solve(1, v);
 	
 	cout << cnt;
 }
