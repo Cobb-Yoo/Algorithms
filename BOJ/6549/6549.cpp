@@ -1,54 +1,42 @@
-#include <iostream>
+#include <bits/stdc++.h>
+#define ll long long
 using namespace std;
 
-int MAX = 0;
-int maxCnt;
-int n;
-int arr[100001];
-int value;
-
-int right(int cnt){
-	int result = 0;
-	if(cnt < n && (value <= arr[cnt])){
-		result = value + right(cnt+1);
-		return result;
-	}else{
-		return 0;
-	}
-}
-int left(int cnt){
-	int result = 0;
-	if(cnt >= 0 && (value <= arr[cnt])){
-		result = value + left(cnt-1);
-		return result;
-	}else{
-		return 0;
-	}
-}
-void cal(int cnt){
-	int result=0;
-	
-	result += right(cnt+1);
-	result += left(cnt-1);
-	result += arr[cnt];
-	
-	if(MAX < result){
-		MAX = result;
-		maxCnt = cnt;
-	}
-}
-
 int main(){
-	while(cin >> n && n){
-		for(int i=0;i<n;i++){
-			cin >> arr[i];
-		}
-	
-		for(int i=0;i<n;i++) {
-			value = arr[i];
-			cal(i);
+	int n;
+	while(cin >> n && n != 0){
+		vector<int> v;
+		stack<int> s;
+		ll area = 0;
+		
+		for(int tmp,i=0;i<n;i++){
+			cin >> tmp;
+			v.push_back(tmp);
 		}
 		
-		cout << MAX << endl;
+		for(int i=0;i<n;i++){
+			while(!s.empty() && v[s.top()] > v[i]){
+				ll height = v[s.top()];
+				ll width = i;
+				s.pop();
+				
+				if(!s.empty()) width = i - s.top() -1;
+				if(width*height > area) area = width*height;
+			}
+			s.push(i);
+		}
+		
+		while(!s.empty()){
+			ll height = v[s.top()];
+			int idx = s.top();
+			s.pop();
+			ll width = n;
+			
+			if(!s.empty()) width = n - s.top() -1;	
+			
+			if(width*height > area) area = width*height;
+		}
+		
+		cout << area << endl;
 	}
 }
