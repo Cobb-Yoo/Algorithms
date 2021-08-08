@@ -31,5 +31,9 @@ int main(){
 	num1 = stoi(str1);
 	num2 = stoi(str2);
 	
-	cout << num1 << " " << num2 << endl;
+	int num;
+	if(num1 < num2) num = gcd(num1, num2);
+	else num = gcd(num2, num1);
+	
+	cout << num1/num << ":" << num2/num << endl;
 }
