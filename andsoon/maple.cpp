@@ -8,6 +8,7 @@ using namespace std;
 
 bool randomArr[1000];
 double MAX;
+
 int legend;
 vector<int> legendCompleteCount;
 
@@ -39,9 +40,9 @@ bool cmp(int a, int b){
 int main(){	
 	srand((unsigned)time(NULL));
 	
-	printf("·¹Àüµå µµ´ÞÀ» %ld¹øÇßÀ» ¶§ °³¼ö¸¦ ±¸ÇÏ´Â ÇÁ·Î±×·¥ÀÔ´Ï´Ù.\n",MAX);
-	cout << "¸ðµç °æ¿ì´Â ºí·¢Å¥ºê¸¸ °è»êÇß½À´Ï´Ù.\n";
-	cout << "¸î¹øÀÇ ·¹Àü´õ¸®¸¦ º¸°í ½ÍÀº½Å°¡¿ä? °ªÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä : ";
+	printf("ë ˆì „ë“œ ë„ë‹¬ì„ %ldë²ˆí–ˆì„ ë•Œ ê°œìˆ˜ë¥¼ êµ¬í•˜ëŠ” í”„ë¡œê·¸ëž¨ìž…ë‹ˆë‹¤.\n",MAX);
+	cout << "ëª¨ë“  ê²½ìš°ëŠ” ë¸”ëž™íë¸Œë§Œ ê³„ì‚°í–ˆìŠµë‹ˆë‹¤.\n";
+	cout << "ëª‡ë²ˆì˜ ë ˆì „ë”ë¦¬ë¥¼ ë³´ê³  ì‹¶ì€ì‹ ê°€ìš”? ê°’ì„ ìž…ë ¥í•´ì£¼ì„¸ìš” : ";
 	cin >> MAX;
 	
 	int now = 0;
@@ -64,7 +65,7 @@ int main(){
 		if(pre != now){
 			now = pre;
 			system("cls");
-			cout << now << "% ¸¸Å­ ÁøÇàµÇ¾ú½À´Ï´Ù.\n";
+			cout << now << "% ë§Œí¼ ì§„í–‰ë˜ì—ˆìŠµë‹ˆë‹¤.\n";
 		}
 	}
 	system("cls");
@@ -76,11 +77,11 @@ int main(){
 		result += legendCompleteCount[i];
 	}
 	
-	printf("%ldÀÇ ¾ÆÀÌÅÛÀ» ·¹¾î¿¡¼­ ·¹Àü´õ¸®·Î ¿Ã¸®±â À§ÇØ¼­´Â\n",MAX);
-	cout << result/MAX << "°³ Á¤µµ °É¸³´Ï´Ù.\n";
-	cout << "°¡Àå ¸¹ÀÌ ¼Ò¸ðÇÑ °¹¼ö´Â ";
-	printf("%ld°³ ÀÔ´Ï´Ù.\n", legendCompleteCount[0]);
+	printf("%ldì˜ ì•„ì´í…œì„ ë ˆì–´ì—ì„œ ë ˆì „ë”ë¦¬ë¡œ ì˜¬ë¦¬ê¸° ìœ„í•´ì„œëŠ”\n",MAX);
+	cout << result/MAX << "ê°œ ì •ë„ ê±¸ë¦½ë‹ˆë‹¤.\n";
+	cout << "ê°€ìž¥ ë§Žì´ ì†Œëª¨í•œ ê°¯ìˆ˜ëŠ” ";
+	printf("%ldê°œ ìž…ë‹ˆë‹¤.\n", legendCompleteCount[0]);
 	
-	cout << "°¡Àå Àû°Ô ¼Ò¸ðÇÑ °¹¼ö´Â ";
-	printf("%ld°³ ÀÔ´Ï´Ù.\n", legendCompleteCount[MAX-1]);
+	cout << "ê°€ìž¥ ì ê²Œ ì†Œëª¨í•œ ê°¯ìˆ˜ëŠ” ";
+	printf("%ldê°œ ìž…ë‹ˆë‹¤.\n", legendCompleteCount[MAX-1]);
 }
