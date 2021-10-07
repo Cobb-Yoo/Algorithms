@@ -12,12 +12,12 @@ int gcd(int a, int b){
 
 int main(){
 	string str; cin >> str;
-	
+	int idx;
+	int num, num1, num2;
 	string str1 = "", str2 = "";
 	
 	int len = str.size();
 	
-	int idx;
 	for(int i=0;i<len;i++){
 		if(str[i] == ':') {
 			idx = i;
@@ -27,11 +27,9 @@ int main(){
 	str1 = str.substr(0, idx);
 	str2 = str.substr(idx+1, len);
 	
-	int num1, num2;
 	num1 = stoi(str1);
 	num2 = stoi(str2);
 	
-	int num;
 	if(num1 < num2) num = gcd(num1, num2);
 	else num = gcd(num2, num1);
 	
