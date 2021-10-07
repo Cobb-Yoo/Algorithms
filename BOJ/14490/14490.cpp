@@ -1,6 +1,6 @@
 #include <bits/stdc++.h> 
 using namespace std;
-
+// 제발 커밋이 되어라 
 int gcd(int a, int b){
     if(b == 0) return a;
 	else return gcd(b, a%b);
