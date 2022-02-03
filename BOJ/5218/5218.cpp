@@ -2,16 +2,28 @@
 using namespace std;
 
 int main(){
-	int a = 0, b = 0;
-	int len; cin >> len;
-	string str; cin >> str;
+	int n; cin >> n;
 	
-	for(int i=0;i<len;i++){
-		if(str[i] == 'A') a++;
-		else b++;
+	string a, b;
+	int tmp;
+	while(n--){
+		cin >> a >> b;
+		int len = a.length()-1;
+		
+		cout << "Distances: ";
+		for(int i=0;i<len;i++){
+			tmp = b[i] - a[i];
+			if(tmp < 0){
+				tmp += 26;
+			}
+			cout << tmp << " ";
+		}
+		
+		tmp = b[len]-a[len];
+		if(tmp < 0){
+				tmp += 26;
+		}
+		
+		cout << tmp << endl;
 	}
-	
-	if(a < b) cout << 'B';
-	else if(b < a) cout << 'A';
-	else cout << "Tie";
 }
