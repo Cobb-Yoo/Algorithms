@@ -5,6 +5,9 @@ bool check(char c){
 	if(c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u' ){
 		return 1;
 	}
+	else if(c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U' ){
+		return 1;
+	}
 	
 	return 0;
 }
@@ -12,7 +15,7 @@ bool check(char c){
 int main(){
 	string str;
 	
-	while(cin>>str){
+	while(getline(cin, str)){
 		int len = str.size();
 		int result = 0;
 		
