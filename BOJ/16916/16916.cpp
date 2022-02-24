@@ -11,7 +11,7 @@ vector<int> failFunc(string sub){
 			j = v[j-1];
 		}
 		if(sub[i] == sub[j]){
-			v[i] == ++j;
+			v[i] = ++j;
 		}
 	}
 	
@@ -29,7 +29,7 @@ bool kmp(string str, string sub){
 		
 		if(str[i] == sub[j]){
 			if(j == sub.size()-1) return 1;
-			else j++;
+			else j+=1;
 		}
 	}
 	
